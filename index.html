@@ -1,77 +1,289 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickTools India - Free Online Image Compressor, Age & Daily Utility Tools</title>
-    <meta name="description" content="100% Free online tools for students and daily use. Compress images to 20KB/50KB, calculate exact age, generate WhatsApp links and QR codes instantly.">
+    <title>QuickTools.in - Fast, Free & Privacy-First Daily Online Tools</title>
+    <meta name="description" content="100% Free online tools for students and daily use. Compress images to 20KB/50KB, calculate exact age, generate WhatsApp links and QR codes instantly in your browser.">
     <meta name="keywords" content="free online tools, image compressor 20kb, age calculator india, whatsapp link generator, free qr code generator">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .hero-pattern {
+            background-color: #0f172a;
+            background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.35) 0px, transparent 50%),
+                              radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.35) 0px, transparent 50%),
+                              radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.2) 0px, transparent 50%);
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
-    <!-- Navbar -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-blue-600 tracking-tight">QuickTools<span class="text-slate-800">.in</span></a>
-            <nav class="space-x-6 text-sm font-medium hidden md:flex">
+    <!-- Glassmorphic Sticky Navbar -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-blue-500/20 group-hover:scale-105 transition">
+                    Q
+                </div>
+                <span class="text-xl font-extrabold tracking-tight text-slate-900">QuickTools<span class="text-blue-600">.in</span></span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-7 text-sm font-semibold text-slate-600">
                 <a href="image-compressor.html" class="hover:text-blue-600 transition">Image Compressor</a>
                 <a href="age-calculator.html" class="hover:text-blue-600 transition">Age Calculator</a>
                 <a href="whatsapp-link.html" class="hover:text-blue-600 transition">WhatsApp Link</a>
                 <a href="qr-generator.html" class="hover:text-blue-600 transition">QR Generator</a>
             </nav>
+
+            <a href="#tools-section" class="bg-slate-900 hover:bg-blue-600 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg transition shadow-sm">
+                Explore Tools
+            </a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 px-4 text-center">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Fast, Free & Privacy-First Daily Online Tools</h1>
-            <p class="text-blue-100 text-lg mb-6">No sign-up required. Everything runs directly in your browser—your files never leave your device.</p>
+    <!-- Modern Hero Section -->
+    <section class="hero-pattern text-white py-16 sm:py-24 px-4 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-blue-200 text-xs font-semibold mb-6 backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                100% Free &bull; No Sign-Up &bull; Browser-Based Privacy
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-5">
+                Every Daily Utility Tool You Need, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-emerald-300">All in One Place.</span>
+            </h1>
+
+            <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-9 leading-relaxed">
+                Compress exam photos to exact KB, calculate government exam age eligibility, and generate instant WhatsApp & QR links—without your files ever leaving your device.
+            </p>
+
+            <!-- Live Search Bar -->
+            <div class="max-w-xl mx-auto relative">
+                <div class="flex items-center bg-white rounded-2xl p-2 shadow-2xl shadow-blue-950/50 border border-slate-200">
+                    <svg class="w-5 h-5 text-slate-400 ml-3 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input type="text" id="toolSearch" placeholder="Search tools (e.g., 20KB photo, age, WhatsApp, QR)..." 
+                           class="w-full py-2 px-2 text-slate-800 text-sm sm:text-base focus:outline-none bg-transparent">
+                    <span class="hidden sm:inline-block text-xs font-medium text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md mr-1">Instant</span>
+                </div>
+            </div>
+
+            <!-- Quick Filter Pills -->
+            <div class="flex flex-wrap justify-center gap-2 mt-5 text-xs">
+                <span class="text-slate-400 py-1">Popular:</span>
+                <a href="image-compressor.html" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition">Compress to 20KB</a>
+                <a href="age-calculator.html" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition">Govt Exam Age</a>
+                <a href="whatsapp-link.html" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition">wa.me Link</a>
+                <a href="qr-generator.html" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition">Permanent QR</a>
+            </div>
         </div>
     </section>
 
-    <!-- Tools Grid -->
-    <main class="max-w-6xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold mb-8 text-slate-800">Popular Free Tools</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Tools Grid Section -->
+    <main id="tools-section" class="max-w-6xl mx-auto px-4 sm:px-6 py-14 flex-grow w-full">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-2">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Popular Free Tools</h2>
+                <p class="text-slate-500 text-sm mt-1">Click any tool below to start instantly—zero waiting time.</p>
+            </div>
+            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full self-start sm:self-auto">
+                4 Active Utilities
+            </span>
+        </div>
+
+        <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <!-- Tool Card 1 -->
-            <a href="image-compressor.html" class="group bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition duration-200">
-                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-blue-600 group-hover:text-white transition">🖼️</div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-blue-600 transition">Image Size Compressor</h3>
-                <p class="text-sm text-slate-600">Reduce JPG/PNG size to 20KB, 50KB, or custom KB for exam & job forms.</p>
+            <!-- Tool Card 1: Image Compressor -->
+            <a href="image-compressor.html" data-keywords="image photo compressor resize 20kb 50kb kb reducer jpg png signature" 
+               class="tool-card group relative bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1.5 hover:border-blue-500 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-50 text-blue-700">Most Used</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition">Image Size Compressor</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Reduce JPG/PNG photo & signature size to 20KB, 50KB, or custom KB for exam & job forms.</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-blue-600">
+                    Open Tool 
+                    <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div>
             </a>
 
-            <!-- Tool Card 2 -->
-            <a href="age-calculator.html" class="group bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition duration-200">
-                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-emerald-600 group-hover:text-white transition">📅</div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-emerald-600 transition">Exact Age Calculator</h3>
-                <p class="text-sm text-slate-600">Calculate exact age in years, months, and days as of any specific date.</p>
+            <!-- Tool Card 2: Age Calculator -->
+            <a href="age-calculator.html" data-keywords="age calculator dob date of birth years months days govt exam eligibility" 
+               class="tool-card group relative bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1.5 hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">Students</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition">Exact Age Calculator</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Calculate your exact age in years, months, and days as of any specific notification cut-off date.</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-emerald-600">
+                    Open Tool 
+                    <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div>
             </a>
 
-            <!-- Tool Card 3 -->
-            <a href="whatsapp-link.html" class="group bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition duration-200">
-                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-green-600 group-hover:text-white transition">💬</div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-green-600 transition">WhatsApp Link Generator</h3>
-                <p class="text-sm text-slate-600">Create direct wa.me chat links with custom pre-filled messages in seconds.</p>
+            <!-- Tool Card 3: WhatsApp Link -->
+            <a href="whatsapp-link.html" data-keywords="whatsapp link generator wa.me direct message chat without saving number" 
+               class="tool-card group relative bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-green-500/10 hover:-translate-y-1.5 hover:border-green-500 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-green-50 text-green-700">Business</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-green-600 transition">WhatsApp Link Generator</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Create direct wa.me chat links with pre-filled messages without saving phone numbers.</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-green-600">
+                    Open Tool 
+                    <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div>
             </a>
 
-            <!-- Tool Card 4 -->
-            <a href="qr-generator.html" class="group bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-500 hover:shadow-md transition duration-200">
-                <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-purple-600 group-hover:text-white transition">📱</div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-purple-600 transition">Free QR Code Generator</h3>
-                <p class="text-sm text-slate-600">Convert any website URL, UPI link, or text into a downloadable QR code.</p>
+            <!-- Tool Card 4: QR Code Generator -->
+            <a href="qr-generator.html" data-keywords="qr code generator free permanent url upi link barcode download png" 
+               class="tool-card group relative bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1.5 hover:border-purple-500 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-50 text-purple-700">No Expiry</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-purple-600 transition">Free QR Code Generator</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Convert any website URL, UPI link, or plain text into a downloadable static QR code.</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-purple-600">
+                    Open Tool 
+                    <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div>
             </a>
 
         </div>
+
+        <!-- No Search Results Message -->
+        <div id="noResults" class="hidden text-center py-12">
+            <p class="text-slate-500 font-medium">No matching tools found. Try searching for "image", "age", "WhatsApp", or "QR".</p>
+        </div>
+
+        <!-- Why Choose Us / Trust Section (Great for User Trust & AdSense Content Depth) -->
+        <section class="mt-20 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-sm">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-2xl font-extrabold text-slate-900">Why Thousands Trust QuickTools.in</h2>
+                <p class="text-slate-500 text-sm mt-2">Built for speed, simplicity, and absolute privacy on both mobile and desktop browsers.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 font-bold">1</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 mb-1">100% Browser-Based Privacy</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">Your photos and signatures are processed locally in your browser. Nothing is ever uploaded to any external server.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 font-bold">2</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 mb-1">Zero Sign-Up or Hidden Fees</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">No login walls, no watermarks, and no daily limits. Open any tool and get your work done in seconds.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 font-bold">3</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 mb-1">Tailored for Indian Forms</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">Optimized specifically for SSC, UPSC, TSPSC, APPSC, and college portal file-size and age rules.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-8 mt-16 text-center text-sm">
-        <p>&copy; 2026 QuickTools India. All tools run 100% locally in your browser.</p>
+    <!-- Comprehensive AdSense-Ready Footer -->
+    <footer class="bg-slate-900 text-slate-400 pt-12 pb-8 mt-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800 text-sm">
+                <div>
+                    <span class="text-xl font-extrabold text-white">QuickTools<span class="text-blue-500">.in</span></span>
+                    <p class="mt-3 text-slate-400 leading-relaxed">Fast, free, and secure browser utilities built for students, job aspirants, and everyday productivity.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-3">Quick Utilities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="image-compressor.html" class="hover:text-white transition">Image Compressor (20KB/50KB)</a></li>
+                        <li><a href="age-calculator.html" class="hover:text-white transition">Exact Age Calculator</a></li>
+                        <li><a href="whatsapp-link.html" class="hover:text-white transition">WhatsApp Direct Link</a></li>
+                        <li><a href="qr-generator.html" class="hover:text-white transition">Permanent QR Generator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-3">Company & Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-2">
+                <p>&copy; 2026 QuickTools.in. All rights reserved.</p>
+                <p>Processed 100% locally in your browser.</p>
+            </div>
+        </div>
     </footer>
 
+    <!-- Live Search Filter Script -->
+    <script>
+        const searchInput = document.getElementById('toolSearch');
+        const cards = document.querySelectorAll('.tool-card');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                const keywords = card.getAttribute('data-keywords').toLowerCase();
+
+                if (title.includes(query) || desc.includes(query) || keywords.includes(query)) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
