@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free QR Code Generator Online - Download High-Res PNG - ToolBoxIndia</title>
+    <meta name="description" content="Generate free permanent QR codes for website URLs, Wi-Fi, UPI links, or plain text. Instant download with zero expiration and no sign-up.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-600">ToolBox<span class="text-slate-800">India</span></a>
+            <a href="index.html" class="text-sm font-medium text-blue-600 hover:underline">&larr; All Tools</a>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-10 flex-grow">
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Free Permanent QR Code Generator</h1>
+            <p class="text-slate-600 text-sm mb-6">Convert any link, text, or contact info into a high-resolution QR code that never expires.</p>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Enter Website URL or Text</label>
+                    <input type="text" id="qrText" placeholder="https://yourwebsite.com" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm">
+                </div>
+                <button onclick="generateQR()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-lg transition">Generate QR Code</button>
+            </div>
+
+            <div id="qrResult" class="hidden mt-8 p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center">
+                <div id="qrcode" class="bg-white p-4 rounded-lg shadow-sm mb-4"></div>
+                <button onclick="downloadQR()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition">Download QR Image (PNG)</button>
+            </div>
+        </div>
+
+        <!-- SEO Guide & FAQ -->
+        <article class="mt-12 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-5 text-slate-700 text-sm leading-relaxed">
+            <h2 class="text-xl font-bold text-slate-900">Why Use Static QR Codes from ToolBoxIndia?</h2>
+            <p>Many online QR generators create "dynamic" QR codes that stop working after a 14-day free trial unless you pay a monthly subscription. Our tool generates 100% static QR codes directly in your browser—meaning your data is encoded directly into the pattern and will work forever without expiration.</p>
+
+            <h3 class="text-lg font-bold text-slate-900">Popular Uses for QR Codes</h3>
+            <ul class="list-disc list-inside space-y-1">
+                <li><strong>Business Cards & Flyers:</strong> Link directly to your portfolio, LinkedIn profile, or business website.</li>
+                <li><strong>Shop Counter & Menus:</strong> Share digital restaurant menus, Google Review links, or social media handles.</li>
+                <li><strong>Event Invitations:</strong> Encode Google Maps venue coordinates so guests can navigate easily.</li>
+            </ul>
+        </article>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-16 text-center text-sm">
+        <div class="max-w-5xl mx-auto px-4 space-y-3">
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="about.html" class="hover:text-white">About Us</a>
+                <a href="contact.html" class="hover:text-white">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white">Terms & Conditions</a>
+            </div>
+            <p>&copy; 2026 ToolBoxIndia. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function generateQR() {
+            const text = document.getElementById('qrText').value.trim();
+            if (!text) {
+                alert('Please enter a URL or text first!');
+                return;
+            }
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+            new QRCode(qrContainer, {
+                text: text,
+                width: 220,
+                height: 220,
+                colorDark: "#0f172a",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            document.getElementById('qrResult').classList.remove('hidden');
+        }
+        function downloadQR() {
+            const img = document.querySelector('#qrcode img');
+            if (img) {
+                const link = document.createElement('a');
+                link.href = img.src;
+                link.download = 'qrcode.png';
+                link.click();
+            }
+        }
+    </script>
+</body>
+</html>
