@@ -3,121 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Image Compressor to 20KB, 50KB Online - No Upload Required</title>
-    <meta name="description" content="Compress JPG, JPEG, and PNG images to exact KB size (20KB, 50KB, 100KB) online for free. 100% secure browser-based image size reducer for govt exam forms.">
+    <title>Free Image Compressor to Exact KB (10KB, 20KB, 50KB, 100KB, 200KB) - QuickTools.in</title>
+    <meta name="description" content="Compress JPG, PNG, and WebP images to exact target KB size (10KB, 20KB, 50KB, 100KB, 200KB, 500KB) online for free. 100% browser-based privacy with zero upload.">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
-    <header class="bg-white shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-blue-600">QuickTools<span class="text-slate-800">.in</span></a>
-            <a href="index.html" class="text-sm font-medium text-blue-600 hover:underline">&larr; All Tools</a>
+    <!-- Navbar -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-base">Q</div>
+                <span class="text-xl font-extrabold tracking-tight text-slate-900">QuickTools<span class="text-blue-600">.in</span></span>
+            </a>
+            <a href="index.html" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition">&larr; All Tools</a>
         </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-4 py-10">
-        <!-- Tool Box -->
-        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Free Image Size Compressor (KB Reducer)</h1>
-            <p class="text-slate-600 text-sm mb-6">Compress photos & signatures for online applications instantly. Your images are never uploaded to any server.</p>
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
+        
+        <!-- Header Title -->
+        <div class="text-center mb-8">
+            <span class="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">Exact KB Reducer</span>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900">Smart Image Size Compressor</h1>
+            <p class="text-slate-500 text-sm sm:text-base mt-2 max-w-xl mx-auto">Compress photos & signatures to any exact target size (10KB to 2MB+) locally in your browser.</p>
+        </div>
 
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold mb-2">1. Select Image (JPG / PNG / WebP)</label>
-                    <input type="file" id="imageInput" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-slate-300 rounded-lg p-2">
+        <!-- Main Tool Container -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200/90">
+            
+            <!-- Drag & Drop Upload Box -->
+            <label id="dropZone" for="imageInput" class="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-blue-300 rounded-2xl bg-blue-50/40 hover:bg-blue-50 cursor-pointer transition group">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-3 group-hover:scale-105 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                    </div>
+                    <p id="fileNameDisplay" class="text-sm font-bold text-slate-700">Click to upload or drag & drop your image here</p>
+                    <p class="text-xs text-slate-500 mt-1">Supports JPG, JPEG, PNG, WebP (Max 25MB)</p>
+                </div>
+                <input id="imageInput" type="file" accept="image/*" class="hidden" />
+            </label>
+
+            <!-- Mode Tabs -->
+            <div class="mt-7">
+                <div class="flex bg-slate-100 p-1 rounded-xl mb-6">
+                    <button type="button" id="tabTarget" onclick="switchMode('target')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg bg-white text-blue-600 shadow-sm transition">
+                        Exact Target Size (KB)
+                    </button>
+                    <button type="button" id="tabManual" onclick="switchMode('manual')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-slate-900 transition">
+                        Manual Quality & Resize
+                    </button>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-semibold mb-2">2. Quality / Compression Level (<span id="qualityVal">60</span>%)</label>
-                    <input type="range" id="qualitySlider" min="10" max="95" value="60" class="w-full accent-blue-600">
+                <!-- Mode 1: Exact Target KB (All Sizes) -->
+                <div id="targetModePanel" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">Quick Size Presets (Click to Select)</label>
+                        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2.5">
+                            <button type="button" onclick="setTargetKB(10)" class="preset-btn py-2 px-3 rounded-xl border border-slate-200 text-xs font-bold hover:border-blue-500 hover:bg-blue-50 transition">10 KB</button>
+                            <button type="button" onclick="setTargetKB(20)" class="preset-btn py-2 px-3 rounded-xl border border-blue-500 bg-blue-50 text-blue-700 text-xs font-bold transition">20 KB</button>
+                            <button type="button" onclick="setTargetKB(50)" class="preset-btn py-2 px-3 rounded-xl border border-slate-200 text-xs font-bold hover:border-blue-500 hover:bg-blue-50 transition">50 KB</button>
+                            <button type="button" onclick="setTargetKB(100)" class="preset-btn py-2 px-3 rounded-xl border border-slate-200 text-xs font-bold hover:border-blue-500 hover:bg-blue-50 transition">100 KB</button>
+                            <button type="button" onclick="setTargetKB(200)" class="preset-btn py-2 px-3 rounded-xl border border-slate-200 text-xs font-bold hover:border-blue-500 hover:bg-blue-50 transition">200 KB</button>
+                            <button type="button" onclick="setTargetKB(500)" class="preset-btn py-2 px-3 rounded-xl border border-slate-200 text-xs font-bold hover:border-blue-500 hover:bg-blue-50 transition">500 KB</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1.5">Custom Target Size (in KB)</label>
+                            <div class="relative">
+                                <input type="number" id="targetKbInput" value="20" min="5" max="10000" placeholder="e.g., 35" class="w-full border border-slate-300 rounded-xl p-3 pr-12 text-sm font-bold focus:outline-none focus:border-blue-600">
+                                <span class="absolute right-3.5 top-3 text-xs font-bold text-slate-400">KB</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1.5">Output Format</label>
+                            <select id="formatSelect" class="w-full border border-slate-300 rounded-xl p-3 text-sm font-semibold bg-white focus:outline-none focus:border-blue-600">
+                                <option value="image/jpeg">JPG / JPEG (Best for Forms)</option>
+                                <option value="image/webp">WebP (Smallest Size)</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <button id="compressBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Compress Image Now</button>
+                <!-- Mode 2: Manual Quality & Max Width -->
+                <div id="manualModePanel" class="hidden space-y-5">
+                    <div>
+                        <div class="flex justify-between text-sm font-bold mb-2">
+                            <span>Compression Quality</span>
+                            <span class="text-blue-600"><span id="qualityVal">70</span>%</span>
+                        </div>
+                        <input type="range" id="qualitySlider" min="5" max="98" value="70" class="w-full accent-blue-600 cursor-pointer">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-1.5">Max Resolution (Width)</label>
+                        <select id="maxWidthSelect" class="w-full border border-slate-300 rounded-xl p-3 text-sm font-semibold bg-white">
+                            <option value="original">Keep Original Dimensions</option>
+                            <option value="1920">1920px (Full HD)</option>
+                            <option value="1280" selected>1280px (Standard Web)</option>
+                            <option value="800">800px (Medium Form)</option>
+                            <option value="400">400px (Passport / Signature)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button id="compressBtn" class="mt-6 w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-500/25 transition flex items-center justify-center gap-2">
+                    <span id="btnText">Compress Image Now</span>
+                </button>
             </div>
 
             <!-- Result Box -->
-            <div id="resultBox" class="hidden mt-8 p-5 bg-slate-50 rounded-xl border border-slate-200 text-center">
-                <div class="flex justify-around text-sm mb-4">
-                    <div>
-                        <p class="text-slate-500">Original Size</p>
-                        <p id="origSize" class="font-bold text-slate-800 text-lg">-</p>
+            <div id="resultBox" class="hidden mt-8 pt-8 border-t border-slate-200">
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
+                    <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-200">
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Original Size</p>
+                            <p id="origSize" class="text-lg font-extrabold text-slate-800">-</p>
+                        </div>
+                        <div class="text-center">
+                            <span id="savedBadge" class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-extrabold">-</span>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Compressed Size</p>
+                            <p id="newSize" class="text-lg font-extrabold text-emerald-600">-</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-slate-500">Compressed Size</p>
-                        <p id="newSize" class="font-bold text-emerald-600 text-lg">-</p>
+
+                    <div class="my-5 flex justify-center bg-white p-3 rounded-xl border border-slate-200/80">
+                        <img id="previewImg" class="max-h-56 rounded-lg object-contain" alt="Compressed Preview">
                     </div>
+
+                    <a id="downloadLink" download="compressed-quicktools.jpg" class="w-full block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-md shadow-emerald-500/20 transition">
+                        Download Compressed Image
+                    </a>
                 </div>
-                <img id="previewImg" class="max-h-48 mx-auto rounded-lg shadow-sm mb-4" alt="Compressed Preview">
-                <a id="downloadLink" download="compressed-image.jpg" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 rounded-lg transition">Download Compressed Image</a>
             </div>
         </div>
 
-        <!-- SEO Content Section (Crucial for Google Ranking & AdSense) -->
-        <article class="mt-12 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6 text-slate-700 leading-relaxed">
-            <h2 class="text-xl font-bold text-slate-900">How to Compress an Image to 20KB or 50KB Online?</h2>
-            <ol class="list-decimal list-inside space-y-2 text-sm">
-                <li>Click on <strong>Select Image</strong> and choose your photo or signature from your mobile or PC.</li>
-                <li>Adjust the <strong>Quality Slider</strong> (lower percentage gives smaller KB size).</li>
-                <li>Click <strong>Compress Image Now</strong> to view the reduced file size instantly.</li>
-                <li>Click <strong>Download Compressed Image</strong> to save it to your device.</li>
+        <!-- SEO Guide & FAQ Section -->
+        <article class="mt-12 bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-200/90 space-y-5 text-slate-700 text-sm leading-relaxed">
+            <h2 class="text-xl font-extrabold text-slate-900">How to Compress an Image to Any Exact KB Size?</h2>
+            <p>Online exam portals (SSC, UPSC, IBPS, TSPSC, APPSC) and passport/PAN card websites require strict file sizes such as <strong>10KB to 20KB for signatures</strong> and <strong>20KB to 50KB for photographs</strong>. With QuickTools.in, you don't need to guess compression percentages:</p>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>Upload or drag-and-drop your JPG, PNG, or WebP file into the box above.</li>
+                <li>Choose a quick preset (<strong>10KB, 20KB, 50KB, 100KB, 200KB, 500KB</strong>) or type any custom KB target.</li>
+                <li>Click <strong>Compress Image Now</strong>—our smart algorithm automatically adjusts quality and dimensions to hit your target size.</li>
+                <li>Download your ready-to-upload image immediately.</li>
             </ol>
 
-            <h3 class="text-lg font-bold text-slate-900">Why Use Our Browser-Based Image Compressor?</h3>
-            <p class="text-sm">Unlike other websites that upload your personal photos and ID signatures to external servers, QuickTools uses HTML5 Canvas technology to compress images directly inside your browser. This ensures 100% privacy and zero waiting time.</p>
+            <h3 class="text-lg font-bold text-slate-900 pt-2">Frequently Asked Questions</h3>
+            <p><strong>Are my personal photos uploaded to a server?</strong><br>No. All compression happens 100% inside your own browser using HTML5 Canvas. Your files never leave your phone or computer.</p>
+            <p><strong>Why did a PNG file compress to JPG?</strong><br>PNG is a lossless format that cannot be compressed to tiny sizes like 20KB. Converting to JPEG or WebP allows extreme file size reduction while keeping text and faces sharp.</p>
         </article>
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-12 text-center text-sm">
+        <div class="max-w-5xl mx-auto px-4 space-y-3">
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="about.html" class="hover:text-white">About Us</a>
+                <a href="contact.html" class="hover:text-white">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white">Terms & Conditions</a>
+            </div>
+            <p>&copy; 2026 QuickTools.in. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
+        let currentMode = 'target';
+        let selectedFile = null;
+
         const imageInput = document.getElementById('imageInput');
+        const dropZone = document.getElementById('dropZone');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
         const qualitySlider = document.getElementById('qualitySlider');
         const qualityVal = document.getElementById('qualityVal');
         const compressBtn = document.getElementById('compressBtn');
-        const resultBox = document.getElementById('resultBox');
+
+        // Handle file selection
+        imageInput.addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                selectedFile = e.target.files[0];
+                fileNameDisplay.textContent = `Selected: ${selectedFile.name} (${(selectedFile.size / 1024).toFixed(1)} KB)`;
+            }
+        });
+
+        // Drag and Drop support
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-blue-600', 'bg-blue-100/60');
+        });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('border-blue-600', 'bg-blue-100/60');
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-blue-600', 'bg-blue-100/60');
+            if (e.dataTransfer.files[0]) {
+                selectedFile = e.dataTransfer.files[0];
+                fileNameDisplay.textContent = `Selected: ${selectedFile.name} (${(selectedFile.size / 1024).toFixed(1)} KB)`;
+            }
+        });
 
         qualitySlider.addEventListener('input', () => {
             qualityVal.textContent = qualitySlider.value;
         });
 
+        function switchMode(mode) {
+            currentMode = mode;
+            const tabTarget = document.getElementById('tabTarget');
+            const tabManual = document.getElementById('tabManual');
+            const targetPanel = document.getElementById('targetModePanel');
+            const manualPanel = document.getElementById('manualModePanel');
+
+            if (mode === 'target') {
+                tabTarget.className = 'flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg bg-white text-blue-600 shadow-sm transition';
+                tabManual.className = 'flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-slate-900 transition';
+                targetPanel.classList.remove('hidden');
+                manualPanel.classList.add('hidden');
+            } else {
+                tabManual.className = 'flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg bg-white text-blue-600 shadow-sm transition';
+                tabTarget.className = 'flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-lg text-slate-600 hover:text-slate-900 transition';
+                manualPanel.classList.remove('hidden');
+                targetPanel.classList.add('hidden');
+            }
+        }
+
+        function setTargetKB(kb) {
+            document.getElementById('targetKbInput').value = kb;
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                if (btn.textContent.trim() === `${kb} KB`) {
+                    btn.className = 'preset-btn py-2 px-3 rounded-xl border border-blue-500 bg-blue-50 text-blue-700 text-xs font-bold transition';
+                } else {
+                    btn.className = 'preset-btn py-2 px-3 rounded-xl border border-slate-200 text-xs font-bold hover:border-blue-500 hover:bg-blue-50 transition';
+                }
+            });
+        }
+
+        function renderCanvasBlob(img, maxWidth, mimeType, quality) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                let width = img.width;
+                let height = img.height;
+
+                if (maxWidth && width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                // White background for transparent PNGs converted to JPEG
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, width, height);
+                ctx.drawImage(img, 0, 0, width, height);
+
+                canvas.toBlob((blob) => resolve(blob), mimeType, quality);
+            });
+        }
+
         compressBtn.addEventListener('click', () => {
-            const file = imageInput.files[0];
-            if (!file) {
-                alert('Please select an image first!');
+            if (!selectedFile) {
+                alert('Please select or drop an image first!');
                 return;
             }
 
-            document.getElementById('origSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
+            const btnText = document.getElementById('btnText');
+            btnText.textContent = 'Compressing...';
 
             const reader = new FileReader();
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(selectedFile);
             reader.onload = (event) => {
                 const img = new Image();
                 img.src = event.target.result;
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
+                img.onload = async () => {
+                    let finalBlob = null;
+                    const mimeType = document.getElementById('formatSelect').value;
 
-                    // Resize if width is too large (> 1200px) to help hit small KB targets
-                    let width = img.width;
-                    let height = img.height;
-                    const maxDim = 1000;
-                    if (width > maxDim) {
-                        height = Math.round((height * maxDim) / width);
-                        width = maxDim;
+                    if (currentMode === 'manual') {
+                        const quality = parseInt(qualitySlider.value) / 100;
+                        const maxWVal = document.getElementById('maxWidthSelect').value;
+                        const maxW = maxWVal === 'original' ? null : parseInt(maxWVal);
+                        finalBlob = await renderCanvasBlob(img, maxW, 'image/jpeg', quality);
+                    } else {
+                        // Exact Target KB Algorithm (Binary Search + Progressive Dimension Scaling)
+                        const targetBytes = parseFloat(document.getElementById('targetKbInput').value) * 1024;
+                        if (!targetBytes || targetBytes < 1024) {
+                            alert('Please enter a valid target size (minimum 5 KB).');
+                            btnText.textContent = 'Compress Image Now';
+                            return;
+                        }
+
+                        let scaleWidths = [img.width, 1600, 1200, 800, 500, 300];
+                        scaleWidths = scaleWidths.filter(w => w <= img.width);
+                        if (scaleWidths.length === 0) scaleWidths = [img.width];
+
+                        for (let w of scaleWidths) {
+                            let minQ = 0.05, maxQ = 0.96;
+                            let bestBlobForWidth = null;
+
+                            for (let i = 0; i < 8; i++) {
+                                let midQ = (minQ + maxQ) / 2;
+                                let blob = await renderCanvasBlob(img, w, mimeType, midQ);
+                                if (blob.size <= targetBytes) {
+                                    bestBlobForWidth = blob;
+                                    minQ = midQ;
+                                } else {
+                                    maxQ = midQ;
+                                }
+                            }
+
+                            if (bestBlobForWidth) {
+                                finalBlob = bestBlobForWidth;
+                                break;
+                            }
+                            // Fallback smallest possible at this width
+                            finalBlob = await renderCanvasBlob(img, w, mimeType, 0.05);
+                        }
                     }
 
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
+                    const origKB = (selectedFile.size / 1024).toFixed(2);
+                    const newKB = (finalBlob.size / 1024).toFixed(2);
+                    const savedPercent = Math.max(0, Math.round(((selectedFile.size - finalBlob.size) / selectedFile.size) * 100));
 
-                    const quality = parseInt(qualitySlider.value) / 100;
-                    canvas.toBlob((blob) => {
-                        const url = URL.createObjectURL(blob);
-                        document.getElementById('newSize').textContent = (blob.size / 1024).toFixed(2) + ' KB';
-                        document.getElementById('previewImg').src = url;
-                        document.getElementById('downloadLink').href = url;
-                        resultBox.classList.remove('hidden');
-                    }, 'image/jpeg', quality);
+                    document.getElementById('origSize').textContent = `${origKB} KB`;
+                    document.getElementById('newSize').textContent = `${newKB} KB`;
+                    document.getElementById('savedBadge').textContent = savedPercent > 0 ? `Saved ${savedPercent}%` : 'Optimized';
+
+                    const url = URL.createObjectURL(finalBlob);
+                    const ext = mimeType === 'image/webp' ? 'webp' : 'jpg';
+                    document.getElementById('previewImg').src = url;
+                    const dlLink = document.getElementById('downloadLink');
+                    dlLink.href = url;
+                    dlLink.download = `compressed-${Math.round(newKB)}kb.${ext}`;
+
+                    document.getElementById('resultBox').classList.remove('hidden');
+                    btnText.textContent = 'Compress Image Now';
                 };
             };
         });
