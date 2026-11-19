@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Utility Tool - QuickTools.in</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; background-color: #f5f5fa; }</style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-sm border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 py-3.5 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-extrabold text-slate-900">Quick<span class="text-rose-600">❤</span>Tools<span class="text-xs text-slate-400">.in</span></a>
+            <a href="index.html" class="text-sm font-bold text-rose-600 hover:underline">&larr; All 24 Tools</a>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-10 flex-grow w-full">
+        <div id="toolContainer" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <!-- Dynamic Tool UI loads here -->
+        </div>
+
+        <article id="toolGuide" class="mt-10 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-3 text-sm text-slate-600 leading-relaxed">
+            <!-- Dynamic SEO Guide loads here -->
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500">
+        <div class="flex justify-center gap-5 mb-2 font-semibold">
+            <a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy</a><a href="terms.html">Terms</a>
+        </div>
+        <p>&copy; 2026 QuickTools.in &bull; 100% Client-Side Browser Processing</p>
+    </footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const tool = params.get('tool') || 'merge-pdf';
+        const container = document.getElementById('toolContainer');
+        const guide = document.getElementById('toolGuide');
+
+        const toolsConfig = {
+            'merge-pdf': {
+                title: 'Merge PDF Files Online',
+                desc: 'Combine multiple PDF documents into a single PDF file in your browser.',
+                guide: 'Select 2 or more PDF files from your device and click Merge PDF. Everything runs locally without uploading your sensitive documents.',
+                html: `<input type="file" id="pdfFiles" accept="application/pdf" multiple class="w-full border p-3 rounded-xl mb-4 text-sm">
+                       <button onclick="mergePDFs()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl">Merge PDFs & Download</button>`
+            },
+            'split-pdf': {
+                title: 'Split / Extract PDF Pages',
+                desc: 'Extract specific page numbers (e.g., 1, 3, 5) into a new PDF file.',
+                guide: 'Upload a PDF file, enter the page numbers separated by commas, and download your extracted PDF.',
+                html: `<input type="file" id="splitFile" accept="application/pdf" class="w-full border p-3 rounded-xl mb-3 text-sm">
+                       <input type="text" id="pageNums" placeholder="Pages to extract (e.g., 1, 2, 4)" class="w-full border p-3 rounded-xl mb-4 text-sm">
+                       <button onclick="splitPDF()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl">Extract Pages & Download</button>`
+            },
+            'remove-pages': {
+                title: 'Remove Pages from PDF',
+                desc: 'Enter page numbers you want to delete from your PDF.',
+                guide: 'Upload your PDF and specify which page numbers to delete. A clean PDF without those pages will download automatically.',
+                html: `<input type="file" id="delFile" accept="application/pdf" class="w-full border p-3 rounded-xl mb-3 text-sm">
+                       <input type="text" id="delNums" placeholder="Pages to remove (e.g., 2, 5)" class="w-full border p-3 rounded-xl mb-4 text-sm">
+                       <button onclick="removePDFPages()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl">Remove Pages & Download</button>`
+            },
+            'rotate-pdf': {
+                title: 'Rotate PDF Pages (90° / 180°)',
+                desc: 'Fix upside-down or sideways scanned PDFs permanently.',
+                guide: 'Choose your PDF and rotation angle (90, 180, or 270 degrees) to save a properly oriented PDF.',
+                html: `<input type="file" id="rotFile" accept="application/pdf" class="w-full border p-3 rounded-xl mb-3 text-sm">
+                       <select id="rotAngle" class="w-full border p-3 rounded-xl mb-4 text-sm"><option value="90">90° Clockwise</option><option value="180">180° Flip</option><option value="270">270° Counter-Clockwise</option></select>
+                       <button onclick="rotatePDF()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl">Rotate & Download PDF</button>`
+            },
+            'jpg-to-pdf': {
+                title: 'Convert JPG / PNG Images to PDF',
+                desc: 'Select one or multiple images to combine into a printable PDF document.',
+                guide: 'Upload certificates, ID cards, or notes images and convert them into a single PDF file immediately.',
+                html: `<input type="file" id="imgPdfFiles" accept="image/*" multiple class="w-full border p-3 rounded-xl mb-4 text-sm">
+                       <button onclick="imagesToPDF()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-xl">Convert to PDF & Download</button>`
+            },
+            'text-to-pdf': {
+                title: 'Text & Notes to PDF Converter',
+                desc: 'Type or paste any text and generate a clean PDF document.',
+                guide: 'Paste your text, essay, or application letter below and export it as an A4 PDF document.',
+                html: `<textarea id="pdfTextContent" rows="7" placeholder="Paste or type your text here..." class="w-full border p-3 rounded-xl mb-4 text-sm"></textarea>
+                       <button onclick="textToPDF()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl">Generate & Download PDF</button>`
+            },
+            'emi-calc': {
+                title: 'Loan & EMI Calculator',
+                desc: 'Calculate monthly EMI, total interest, and total payment.',
+                guide: 'Enter your loan amount, annual interest rate (%), and tenure in years to get an instant EMI breakdown.',
+                html: `<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                        <input type="number" id="loanAmt" placeholder="Loan Amount (₹)" class="border p-3 rounded-xl text-sm">
+                        <input type="number" id="loanRate" placeholder="Interest Rate (%)" class="border p-3 rounded-xl text-sm">
+                        <input type="number" id="loanYears" placeholder="Tenure (Years)" class="border p-3 rounded-xl text-sm">
+                       </div>
+                       <button onclick="calcEMI()" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl">Calculate EMI</button>
+                       <div id="toolOut" class="mt-4 p-4 bg-slate-50 rounded-xl font-bold text-slate-800 hidden"></div>`
+            },
+            'gst-calc': {
+                title: 'Indian GST Calculator (CGST + SGST)',
+                desc: 'Calculate GST inclusive or exclusive amounts for 5%, 12%, 18%, and 28%.',
+                guide: 'Enter the base price and choose the GST slab to calculate net amount, GST tax, and final price.',
+                html: `<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                        <input type="number" id="gstAmt" placeholder="Amount (₹)" class="border p-3 rounded-xl text-sm">
+                        <select id="gstRate" class="border p-3 rounded-xl text-sm"><option value="5">5% GST</option><option value="12">12% GST</option><option value="18" selected>18% GST</option><option value="28">28% GST</option></select>
+                        <select id="gstType" class="border p-3 rounded-xl text-sm"><option value="add">Add GST (+)</option><option value="remove">Remove GST (-)</option></select>
+                       </div>
+                       <button onclick="calcGST()" class="w-full bg-violet-600 text-white font-bold py-3 rounded-xl">Calculate GST</button>
+                       <div id="toolOut" class="mt-4 p-4 bg-slate-50 rounded-xl font-bold text-slate-800 hidden"></div>`
+            },
+            'cgpa-calc': {
+                title: 'CGPA to Percentage Converter',
+                desc: 'Convert your 10-point university or school CGPA into percentage.',
+                guide: 'Enter your CGPA (out of 10). Standard CBSE/AICTE multiplier (9.5) and direct 10x percentage are both shown.',
+                html: `<input type="number" step="0.01" id="cgpaVal" placeholder="Enter CGPA (e.g., 8.4)" class="w-full border p-3 rounded-xl mb-4 text-sm">
+                       <button onclick="calcCGPA()" class="w-full bg-pink-600 text-white font-bold py-3 rounded-xl">Convert to Percentage</button>
+                       <div id="toolOut" class="mt-4 p-4 bg-slate-50 rounded-xl font-bold text-slate-800 hidden"></div>`
+            },
+            'word-counter': {
+                title: 'Live Word & Character Counter',
+                desc: 'Paste text to count words, characters, and lines instantly.',
+                guide: 'Useful for essays, job application summaries, Twitter/LinkedIn posts, and SEO meta descriptions.',
+                html: `<textarea id="wcInput" oninput="countWords()" rows="6" placeholder="Start typing or paste text..." class="w-full border p-3 rounded-xl mb-4 text-sm"></textarea>
+                       <div id="wcStats" class="grid grid-cols-3 gap-3 text-center bg-slate-50 p-4 rounded-xl font-bold text-sm"><div>Words: 0</div><div>Chars: 0</div><div>Lines: 0</div></div>`
+            },
+            'case-converter': {
+                title: 'Text Case Converter',
+                desc: 'Convert text to UPPERCASE, lowercase, or Title Case.',
+                guide: 'Paste your text and click any button below to transform capitalization immediately.',
+                html: `<textarea id="caseInput" rows="5" placeholder="Paste text here..." class="w-full border p-3 rounded-xl mb-4 text-sm"></textarea>
+                       <div class="flex flex-wrap gap-2">
+                        <button onclick="convertCase('upper')" class="px-4 py-2 bg-slate-800 text-white rounded-lg text-xs font-bold">UPPERCASE</button>
+                        <button onclick="convertCase('lower')" class="px-4 py-2 bg-slate-800 text-white rounded-lg text-xs font-bold">lowercase</button>
+                        <button onclick="convertCase('title')" class="px-4 py-2 bg-amber-600 text-white rounded-lg text-xs font-bold">Title Case</button>
+                       </div>`
+            },
+            'remove-duplicates': {
+                title: 'Remove Duplicate Lines',
+                desc: 'Delete repeated lines from any list in one click.',
+                guide: 'Paste a list of items, emails, or logs and click Remove Duplicates to keep only unique entries.',
+                html: `<textarea id="dedupInput" rows="6" placeholder="Paste lines here..." class="w-full border p-3 rounded-xl mb-4 text-sm"></textarea>
+                       <button onclick="dedupLines()" class="w-full bg-rose-600 text-white font-bold py-3 rounded-xl">Remove Duplicate Lines</button>`
+            },
+            'password-gen': {
+                title: 'Strong Random Password Generator',
+                desc: 'Generate secure, uncrackable passwords locally.',
+                guide: 'Choose password length and click Generate to create a strong password with letters, numbers, and symbols.',
+                html: `<div class="flex gap-3 mb-4"><input type="number" id="passLen" value="16" min="8" max="64" class="w-28 border p-3 rounded-xl text-sm font-bold"><button onclick="genPass()" class="flex-1 bg-slate-900 text-white font-bold py-3 rounded-xl">Generate Password</button></div>
+                       <input type="text" id="passOut" readonly class="w-full bg-slate-100 border p-3 rounded-xl font-mono text-sm">`
+            },
+            'json-formatter': {
+                title: 'JSON Formatter & Validator',
+                desc: 'Beautify or minify raw JSON strings cleanly.',
+                guide: 'Paste raw API JSON output to format it with proper indentation or check for syntax errors.',
+                html: `<textarea id="jsonInput" rows="7" placeholder='{"name":"QuickTools","free":true}' class="w-full border p-3 rounded-xl mb-4 font-mono text-xs"></textarea>
+                       <div class="flex gap-3"><button onclick="formatJSON(2)" class="flex-1 bg-indigo-600 text-white font-bold py-2.5 rounded-xl text-sm">Beautify JSON</button><button onclick="formatJSON(0)" class="flex-1 bg-slate-800 text-white font-bold py-2.5 rounded-xl text-sm">Minify JSON</button></div>`
+            },
+            'base64-text': {
+                title: 'Base64 Text Encoder & Decoder',
+                desc: 'Convert plain text to Base64 or decode Base64 strings.',
+                guide: 'Enter text or Base64 string below and click Encode or Decode.',
+                html: `<textarea id="b64Input" rows="5" placeholder="Enter text or Base64..." class="w-full border p-3 rounded-xl mb-4 font-mono text-xs"></textarea>
+                       <div class="flex gap-3"><button onclick="runB64(true)" class="flex-1 bg-blue-600 text-white font-bold py-2.5 rounded-xl text-sm">Encode to Base64</button><button onclick="runB64(false)" class="flex-1 bg-slate-800 text-white font-bold py-2.5 rounded-xl text-sm">Decode Base64</button></div>`
+            },
+            'url-encoder': {
+                title: 'URL Encoder & Decoder',
+                desc: 'Encode special URL characters or decode encoded URLs.',
+                guide: 'Paste any URL or query string below to encode or decode it safely.',
+                html: `<textarea id="urlInput" rows="4" placeholder="Paste URL here..." class="w-full border p-3 rounded-xl mb-4 text-sm"></textarea>
+                       <div class="flex gap-3"><button onclick="runURL(true)" class="flex-1 bg-emerald-600 text-white font-bold py-2.5 rounded-xl text-sm">Encode URL</button><button onclick="runURL(false)" class="flex-1 bg-slate-800 text-white font-bold py-2.5 rounded-xl text-sm">Decode URL</button></div>`
+            },
+            'image-to-base64': {
+                title: 'Image to Base64 Converter',
+                desc: 'Convert JPG or PNG files into Base64 Data URLs.',
+                guide: 'Select an image file to generate its Base64 encoded string for web development.',
+                html: `<input type="file" accept="image/*" onchange="imgToB64(this)" class="w-full border p-3 rounded-xl mb-4 text-sm">
+                       <textarea id="imgB64Out" rows="5" readonly placeholder="Base64 output will appear here..." class="w-full bg-slate-50 border p-3 rounded-xl font-mono text-xs"></textarea>`
+            }
+        };
+
+        const current = toolsConfig[tool] || toolsConfig['merge-pdf'];
+        document.title = `${current.title} - QuickTools.in`;
+        container.innerHTML = `<h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">${current.title}</h1>
+                               <p class="text-slate-500 text-sm mb-6">${current.desc}</p>${current.html}`;
+        guide.innerHTML = `<h2 class="text-lg font-bold text-slate-900">How to Use ${current.title}</h2><p>${current.guide}</p>`;
+
+        // Helper Download Function
+        function downloadBlob(bytes, filename, type) {
+            const blob = new Blob([bytes], { type });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+
+        // PDF Functions (pdf-lib)
+        async function mergePDFs() {
+            const files = document.getElementById('pdfFiles').files;
+            if (files.length < 2) return alert('Please select at least 2 PDF files.');
+            const merged = await PDFLib.PDFDocument.create();
+            for (const f of files) {
+                const pdf = await PDFLib.PDFDocument.load(await f.arrayBuffer());
+                const pages = await merged.copyPages(pdf, pdf.getPageIndices());
+                pages.forEach(p => merged.addPage(p));
+            }
+            downloadBlob(await merged.save(), 'merged-quicktools.pdf', 'application/pdf');
+        }
+
+        async function splitPDF() {
+            const file = document.getElementById('splitFile').files[0];
+            const nums = document.getElementById('pageNums').value.split(',').map(n => parseInt(n.trim()) - 1).filter(n => !isNaN(n) && n >= 0);
+            if (!file || !nums.length) return alert('Select a PDF and enter valid page numbers.');
+            const src = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+            const out = await PDFLib.PDFDocument.create();
+            const valid = nums.filter(i => i < src.getPageCount());
+            const pages = await out.copyPages(src, valid);
+            pages.forEach(p => out.addPage(p));
+            downloadBlob(await out.save(), 'extracted-pages.pdf', 'application/pdf');
+        }
+
+        async function removePDFPages() {
+            const file = document.getElementById('delFile').files[0];
+            const delSet = new Set(document.getElementById('delNums').value.split(',').map(n => parseInt(n.trim()) - 1));
+            if (!file) return alert('Select a PDF first.');
+            const src = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+            const out = await PDFLib.PDFDocument.create();
+            const keep = src.getPageIndices().filter(i => !delSet.has(i));
+            const pages = await out.copyPages(src, keep);
+            pages.forEach(p => out.addPage(p));
+            downloadBlob(await out.save(), 'cleaned-quicktools.pdf', 'application/pdf');
+        }
+
+        async function rotatePDF() {
+            const file = document.getElementById('rotFile').files[0];
+            const deg = parseInt(document.getElementById('rotAngle').value);
+            if (!file) return alert('Select a PDF first.');
+            const pdf = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+            pdf.getPages().forEach(p => p.setRotation(PDFLib.degrees((p.getRotation().angle + deg) % 360)));
+            downloadBlob(await pdf.save(), 'rotated-quicktools.pdf', 'application/pdf');
+        }
+
+        function imagesToPDF() {
+            const files = document.getElementById('imgPdfFiles').files;
+            if (!files.length) return alert('Select at least 1 image.');
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            let idx = 0;
+            function next() {
+                if (idx >= files.length) return doc.save('images-quicktools.pdf');
+                const reader = new FileReader();
+                reader.onload = e => {
+                    if (idx > 0) doc.addPage();
+                    doc.addImage(e.target.result, 'JPEG', 15, 15, 180, 240);
+                    idx++; next();
+                };
+                reader.readAsDataURL(files[idx]);
+            }
+            next();
+        }
+
+        function textToPDF() {
+            const txt = document.getElementById('pdfTextContent').value;
+            if (!txt.trim()) return alert('Enter some text first.');
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const lines = doc.splitTextToSize(txt, 180);
+            doc.text(lines, 15, 20);
+            doc.save('document-quicktools.pdf');
+        }
+
+        // Calculators & Text Utilities
+        function calcEMI() {
+            const P = parseFloat(document.getElementById('loanAmt').value);
+            const r = parseFloat(document.getElementById('loanRate').value) / 12 / 100;
+            const n = parseFloat(document.getElementById('loanYears').value) * 12;
+            if (!P || !r || !n) return alert('Fill all fields.');
+            const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            const out = document.getElementById('toolOut');
+            out.innerHTML = `Monthly EMI: ₹${emi.toFixed(2)} | Total Payment: ₹${(emi * n).toFixed(2)}`;
+            out.classList.remove('hidden');
+        }
+
+        function calcGST() {
+            const amt = parseFloat(document.getElementById('gstAmt').value);
+            const rate = parseFloat(document.getElementById('gstRate').value);
+            const type = document.getElementById('gstType').value;
+            if (!amt) return alert('Enter amount.');
+            let gst = type === 'add' ? (amt * rate) / 100 : amt - (amt * (100 / (100 + rate)));
+            let total = type === 'add' ? amt + gst : amt;
+            const out = document.getElementById('toolOut');
+            out.innerHTML = `GST (${rate}%): ₹${gst.toFixed(2)} (CGST: ₹${(gst/2).toFixed(2)} + SGST: ₹${(gst/2).toFixed(2)}) | Final Amount: ₹${total.toFixed(2)}`;
+            out.classList.remove('hidden');
+        }
+
+        function calcCGPA() {
+            const c = parseFloat(document.getElementById('cgpaVal').value);
+            if (!c || c > 10) return alert('Enter valid CGPA (0 - 10).');
+            const out = document.getElementById('toolOut');
+            out.innerHTML = `CBSE / Standard Percentage (×9.5): ${(c * 9.5).toFixed(2)}% | Direct Percentage (×10): ${(c * 10).toFixed(2)}%`;
+            out.classList.remove('hidden');
+        }
+
+        function countWords() {
+            const t = document.getElementById('wcInput').value;
+            const words = t.trim() ? t.trim().split(/\s+/).length : 0;
+            const lines = t ? t.split(/\n/).length : 0;
+            document.getElementById('wcStats').innerHTML = `<div>Words: ${words}</div><div>Chars: ${t.length}</div><div>Lines: ${lines}</div>`;
+        }
+
+        function convertCase(type) {
+            const el = document.getElementById('caseInput');
+            if (type === 'upper') el.value = el.value.toUpperCase();
+            if (type === 'lower') el.value = el.value.toLowerCase();
+            if (type === 'title') el.value = el.value.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
+        }
+
+        function dedupLines() {
+            const el = document.getElementById('dedupInput');
+            el.value = [...new Set(el.value.split('\n'))].join('\n');
+        }
+
+        function genPass() {
+            const len = parseInt(document.getElementById('passLen').value) || 16;
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
+            let res = '';
+            for (let i = 0; i < len; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('passOut').value = res;
+        }
+
+        function formatJSON(space) {
+            const el = document.getElementById('jsonInput');
+            try { el.value = JSON.stringify(JSON.parse(el.value), null, space); } catch (e) { alert('Invalid JSON!'); }
+        }
+
+        function runB64(encode) {
+            const el = document.getElementById('b64Input');
+            try { el.value = encode ? btoa(el.value) : atob(el.value); } catch (e) { alert('Invalid Base64 input!'); }
+        }
+
+        function runURL(encode) {
+            const el = document.getElementById('urlInput');
+            el.value = encode ? encodeURIComponent(el.value) : decodeURIComponent(el.value);
+        }
+
+        function imgToB64(input) {
+            if (!input.files[0]) return;
+            const r = new FileReader();
+            r.onload = e => document.getElementById('imgB64Out').value = e.target.result;
+            r.readAsDataURL(input.files[0]);
+        }
+    </script>
+</body>
+</html>
