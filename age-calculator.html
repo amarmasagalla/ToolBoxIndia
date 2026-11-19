@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exact Age Calculator Online - Calculate Age in Years, Months & Days</title>
+    <meta name="description" content="Free online Age Calculator for government exams and daily use. Calculate your exact age in years, months, and days from Date of Birth to any target date.">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <header class="bg-white shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-600">QuickTools<span class="text-slate-800">.in</span></a>
+            <a href="index.html" class="text-sm font-medium text-blue-600 hover:underline">&larr; All Tools</a>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-10">
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Exact Age Calculator</h1>
+            <p class="text-slate-600 text-sm mb-6">Find your exact age in years, months, and days for exam eligibility or official forms.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Date of Birth (DOB)</label>
+                    <input type="date" id="dobInput" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Age at the Date of</label>
+                    <input type="date" id="targetDateInput" class="w-full border border-slate-300 rounded-lg p-2.5 text-sm">
+                </div>
+            </div>
+
+            <button onclick="calculateAge()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg transition">Calculate Exact Age</button>
+
+            <div id="ageResult" class="hidden mt-6 p-6 bg-emerald-50 border border-emerald-200 rounded-xl text-center">
+                <p class="text-sm text-emerald-800 font-medium mb-1">Your Exact Age is:</p>
+                <p id="ageOutput" class="text-2xl md:text-3xl font-extrabold text-emerald-700"></p>
+            </div>
+        </div>
+
+        <article class="mt-12 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-4 text-slate-700">
+            <h2 class="text-xl font-bold text-slate-900">How is Exact Age Calculated for Govt Exams?</h2>
+            <p class="text-sm leading-relaxed">Most competitive exams (SSC, UPSC, Banking, State PSCs) specify a cut-off date to determine candidate age eligibility. Simply enter your Date of Birth and the notification's cut-off date above to get your exact age down to the day.</p>
+        </article>
+    </main>
+
+    <script>
+        // Set default target date to today
+        document.getElementById('targetDateInput').valueAsDate = new Date();
+
+        function calculateAge() {
+            const dobVal = document.getElementById('dobInput').value;
+            const targetVal = document.getElementById('targetDateInput').value;
+
+            if (!dobVal || !targetVal) {
+                alert('Please select both dates!');
+                return;
+            }
+
+            const dob = new Date(dobVal);
+            const target = new Date(targetVal);
+
+            if (dob > target) {
+                alert('Date of Birth cannot be after the target date!');
+                return;
+            }
+
+            let years = target.getFullYear() - dob.getFullYear();
+            let months = target.getMonth() - dob.getMonth();
+            let days = target.getDate() - dob.getDate();
+
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            document.getElementById('ageOutput').textContent = `${years} Years, ${months} Months, ${days} Days`;
+            document.getElementById('ageResult').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
