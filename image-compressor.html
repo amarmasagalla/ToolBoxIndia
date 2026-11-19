@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Image Compressor to 20KB, 50KB Online - No Upload Required</title>
+    <meta name="description" content="Compress JPG, JPEG, and PNG images to exact KB size (20KB, 50KB, 100KB) online for free. 100% secure browser-based image size reducer for govt exam forms.">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <header class="bg-white shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-600">QuickTools<span class="text-slate-800">.in</span></a>
+            <a href="index.html" class="text-sm font-medium text-blue-600 hover:underline">&larr; All Tools</a>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-10">
+        <!-- Tool Box -->
+        <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Free Image Size Compressor (KB Reducer)</h1>
+            <p class="text-slate-600 text-sm mb-6">Compress photos & signatures for online applications instantly. Your images are never uploaded to any server.</p>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold mb-2">1. Select Image (JPG / PNG / WebP)</label>
+                    <input type="file" id="imageInput" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-slate-300 rounded-lg p-2">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold mb-2">2. Quality / Compression Level (<span id="qualityVal">60</span>%)</label>
+                    <input type="range" id="qualitySlider" min="10" max="95" value="60" class="w-full accent-blue-600">
+                </div>
+
+                <button id="compressBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">Compress Image Now</button>
+            </div>
+
+            <!-- Result Box -->
+            <div id="resultBox" class="hidden mt-8 p-5 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                <div class="flex justify-around text-sm mb-4">
+                    <div>
+                        <p class="text-slate-500">Original Size</p>
+                        <p id="origSize" class="font-bold text-slate-800 text-lg">-</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-500">Compressed Size</p>
+                        <p id="newSize" class="font-bold text-emerald-600 text-lg">-</p>
+                    </div>
+                </div>
+                <img id="previewImg" class="max-h-48 mx-auto rounded-lg shadow-sm mb-4" alt="Compressed Preview">
+                <a id="downloadLink" download="compressed-image.jpg" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 rounded-lg transition">Download Compressed Image</a>
+            </div>
+        </div>
+
+        <!-- SEO Content Section (Crucial for Google Ranking & AdSense) -->
+        <article class="mt-12 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6 text-slate-700 leading-relaxed">
+            <h2 class="text-xl font-bold text-slate-900">How to Compress an Image to 20KB or 50KB Online?</h2>
+            <ol class="list-decimal list-inside space-y-2 text-sm">
+                <li>Click on <strong>Select Image</strong> and choose your photo or signature from your mobile or PC.</li>
+                <li>Adjust the <strong>Quality Slider</strong> (lower percentage gives smaller KB size).</li>
+                <li>Click <strong>Compress Image Now</strong> to view the reduced file size instantly.</li>
+                <li>Click <strong>Download Compressed Image</strong> to save it to your device.</li>
+            </ol>
+
+            <h3 class="text-lg font-bold text-slate-900">Why Use Our Browser-Based Image Compressor?</h3>
+            <p class="text-sm">Unlike other websites that upload your personal photos and ID signatures to external servers, QuickTools uses HTML5 Canvas technology to compress images directly inside your browser. This ensures 100% privacy and zero waiting time.</p>
+        </article>
+    </main>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const qualitySlider = document.getElementById('qualitySlider');
+        const qualityVal = document.getElementById('qualityVal');
+        const compressBtn = document.getElementById('compressBtn');
+        const resultBox = document.getElementById('resultBox');
+
+        qualitySlider.addEventListener('input', () => {
+            qualityVal.textContent = qualitySlider.value;
+        });
+
+        compressBtn.addEventListener('click', () => {
+            const file = imageInput.files[0];
+            if (!file) {
+                alert('Please select an image first!');
+                return;
+            }
+
+            document.getElementById('origSize').textContent = (file.size / 1024).toFixed(2) + ' KB';
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Resize if width is too large (> 1200px) to help hit small KB targets
+                    let width = img.width;
+                    let height = img.height;
+                    const maxDim = 1000;
+                    if (width > maxDim) {
+                        height = Math.round((height * maxDim) / width);
+                        width = maxDim;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const quality = parseInt(qualitySlider.value) / 100;
+                    canvas.toBlob((blob) => {
+                        const url = URL.createObjectURL(blob);
+                        document.getElementById('newSize').textContent = (blob.size / 1024).toFixed(2) + ' KB';
+                        document.getElementById('previewImg').src = url;
+                        document.getElementById('downloadLink').href = url;
+                        resultBox.classList.remove('hidden');
+                    }, 'image/jpeg', quality);
+                };
+            };
+        });
+    </script>
+</body>
+</html>
