@@ -1,288 +1,371 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickTools.in - Fast, Free & Privacy-First Daily Online Tools</title>
-    <meta name="description" content="100% Free online tools for students and daily use. Compress images to 20KB/50KB, calculate exact age, generate WhatsApp links and QR codes instantly in your browser.">
-    <meta name="keywords" content="free online tools, image compressor 20kb, age calculator india, whatsapp link generator, free qr code generator">
+    <title>QuickTools.in - Every Tool You Need to Work With PDFs, Images & Daily Tasks</title>
+    <meta name="description" content="24+ Free online tools in one place: Merge PDF, Compress Image to 20KB/50KB, JPG to PDF, Age Calculator, EMI Calculator, QR Code & WhatsApp Link Generator.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .hero-pattern {
-            background-color: #0f172a;
-            background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.35) 0px, transparent 50%),
-                              radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.35) 0px, transparent 50%),
-                              radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.2) 0px, transparent 50%);
+        body { font-family: 'Inter', sans-serif; background-color: #f5f5fa; }
+        .mega-triangle::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid #ffffff;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+<body class="text-slate-800 flex flex-col min-h-screen">
 
-    <!-- Glassmorphic Sticky Navbar -->
-    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2.5 group">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-blue-500/20 group-hover:scale-105 transition">
-                    Q
+    <!-- Top Navbar with 7-Column Mega Menu (Matches iLovePDF Reference) -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-200/80">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            
+            <!-- Left: Brand + Quick Links + ALL TOOLS Mega Menu -->
+            <div class="flex items-center gap-7">
+                <a href="index.html" class="flex items-center gap-1 text-2xl font-extrabold tracking-tight text-slate-900">
+                    <span>Quick</span><span class="text-rose-600">❤</span><span>Tools<span class="text-xs font-bold text-slate-400 ml-0.5">.in</span></span>
+                </a>
+
+                <nav class="hidden xl:flex items-center gap-5 text-[12.5px] font-bold uppercase tracking-wide text-slate-700">
+                    <a href="image-compressor.html" class="hover:text-rose-600 transition">Compress Image</a>
+                    <a href="tools.html?tool=jpg-to-pdf" class="hover:text-rose-600 transition">JPG to PDF</a>
+                    <a href="tools.html?tool=merge-pdf" class="hover:text-rose-600 transition">Merge PDF</a>
+                    <a href="age-calculator.html" class="hover:text-rose-600 transition">Age Calculator</a>
+
+                    <!-- ALL TOOLS 7-Column Mega Dropdown -->
+                    <div class="relative group">
+                        <button type="button" class="flex items-center gap-1 text-rose-600 hover:text-rose-700 py-5 focus:outline-none">
+                            <span>ALL TOOLS</span>
+                            <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+
+                        <div class="hidden group-hover:block fixed left-1/2 -translate-x-1/2 top-16 w-[96vw] max-w-[1360px] bg-white rounded-2xl shadow-2xl border border-slate-200 p-7 z-50 mega-triangle">
+                            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-5 text-left normal-case tracking-normal text-[13px]">
+                                
+                                <!-- Col 1: ORGANIZE PDF -->
+                                <div>
+                                    <h4 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mb-3.5">Organize PDF</h4>
+                                    <ul class="space-y-2.5 font-semibold text-slate-700">
+                                        <li><a href="tools.html?tool=merge-pdf" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-orange-100 text-orange-600 flex items-center justify-center text-[10px] font-bold">M</span> Merge PDF</a></li>
+                                        <li><a href="tools.html?tool=split-pdf" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-orange-100 text-orange-600 flex items-center justify-center text-[10px] font-bold">S</span> Split PDF</a></li>
+                                        <li><a href="tools.html?tool=remove-pages" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-rose-100 text-rose-600 flex items-center justify-center text-[10px] font-bold">X</span> Remove Pages</a></li>
+                                        <li><a href="tools.html?tool=rotate-pdf" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-purple-100 text-purple-600 flex items-center justify-center text-[10px] font-bold">R</span> Rotate PDF</a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Col 2: CONVERT TO PDF -->
+                                <div>
+                                    <h4 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mb-3.5">Convert to PDF</h4>
+                                    <ul class="space-y-2.5 font-semibold text-slate-700">
+                                        <li><a href="tools.html?tool=jpg-to-pdf" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-amber-100 text-amber-600 flex items-center justify-center text-[10px] font-bold">JPG</span> JPG to PDF</a></li>
+                                        <li><a href="tools.html?tool=text-to-pdf" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">TXT</span> Text to PDF</a></li>
+                                        <li><a href="tools.html?tool=html-to-pdf" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-yellow-100 text-yellow-700 flex items-center justify-center text-[10px] font-bold">HTM</span> HTML to PDF</a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Col 3: IMAGE OPTIMIZE -->
+                                <div>
+                                    <h4 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mb-3.5">Image Tools</h4>
+                                    <ul class="space-y-2.5 font-semibold text-slate-700">
+                                        <li><a href="image-compressor.html" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px] font-bold">KB</span> Compress Image</a></li>
+                                        <li><a href="image-compressor.html" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-teal-100 text-teal-600 flex items-center justify-center text-[10px] font-bold">20K</span> Photo 20KB/50KB</a></li>
+                                        <li><a href="tools.html?tool=image-crop" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-cyan-100 text-cyan-600 flex items-center justify-center text-[10px] font-bold">CR</span> Resize & Convert</a></li>
+                                        <li><a href="tools.html?tool=image-to-base64" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-indigo-100 text-indigo-600 flex items-center justify-center text-[10px] font-bold">B64</span> Image to Base64</a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Col 4: FINANCE & EXAM CALC -->
+                                <div>
+                                    <h4 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mb-3.5">Calculators</h4>
+                                    <ul class="space-y-2.5 font-semibold text-slate-700">
+                                        <li><a href="age-calculator.html" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px] font-bold">AGE</span> Age Calculator</a></li>
+                                        <li><a href="tools.html?tool=emi-calc" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">EMI</span> Loan / EMI Calc</a></li>
+                                        <li><a href="tools.html?tool=gst-calc" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-violet-100 text-violet-600 flex items-center justify-center text-[10px] font-bold">GST</span> GST Calculator</a></li>
+                                        <li><a href="tools.html?tool=cgpa-calc" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-pink-100 text-pink-600 flex items-center justify-center text-[10px] font-bold">%</span> CGPA to %</a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Col 5: TEXT & WRITING -->
+                                <div>
+                                    <h4 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mb-3.5">Text Utilities</h4>
+                                    <ul class="space-y-2.5 font-semibold text-slate-700">
+                                        <li><a href="tools.html?tool=word-counter" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-sky-100 text-sky-600 flex items-center justify-center text-[10px] font-bold">W</span> Word Counter</a></li>
+                                        <li><a href="tools.html?tool=case-converter" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-amber-100 text-amber-600 flex items-center justify-center text-[10px] font-bold">Aa</span> Case Converter</a></li>
+                                        <li><a href="tools.html?tool=remove-duplicates" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-rose-100 text-rose-600 flex items-center justify-center text-[10px] font-bold">≡</span> Remove Dup Lines</a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Col 6: SECURITY & QR -->
+                                <div>
+                                    <h4 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mb-3.5">Security & Links</h4>
+                                    <ul class="space-y-2.5 font-semibold text-slate-700">
+                                        <li><a href="qr-generator.html" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-purple-100 text-purple-600 flex items-center justify-center text-[10px] font-bold">QR</span> QR Generator</a></li>
+                                        <li><a href="whatsapp-link.html" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-green-100 text-green-600 flex items-center justify-center text-[10px] font-bold">WA</span> WhatsApp Link</a></li>
+                                        <li><a href="tools.html?tool=password-gen" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] font-bold">🔑</span> Password Maker</a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Col 7: DEVELOPER TOOLS -->
+                                <div>
+                                    <h4 class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mb-3.5">Dev & Code</h4>
+                                    <ul class="space-y-2.5 font-semibold text-slate-700">
+                                        <li><a href="tools.html?tool=json-formatter" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-indigo-100 text-indigo-600 flex items-center justify-center text-[10px] font-bold">{}</span> JSON Formatter</a></li>
+                                        <li><a href="tools.html?tool=base64-text" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] font-bold">64</span> Base64 Encode</a></li>
+                                        <li><a href="tools.html?tool=url-encoder" class="flex items-center gap-2 hover:text-rose-600"><span class="w-5 h-5 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px] font-bold">%</span> URL Encoder</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Right: Search + About -->
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <input type="text" id="topSearchInput" placeholder="Search 24+ tools..." class="bg-slate-100 hover:bg-slate-200/70 focus:bg-white border border-transparent focus:border-rose-500 rounded-lg py-1.5 pl-3 pr-8 text-xs font-medium w-44 sm:w-60 transition-all focus:outline-none">
+                    <svg class="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
-                <span class="text-xl font-extrabold tracking-tight text-slate-900">QuickTools<span class="text-blue-600">.in</span></span>
-            </a>
-
-            <nav class="hidden md:flex items-center space-x-7 text-sm font-semibold text-slate-600">
-                <a href="image-compressor.html" class="hover:text-blue-600 transition">Image Compressor</a>
-                <a href="age-calculator.html" class="hover:text-blue-600 transition">Age Calculator</a>
-                <a href="whatsapp-link.html" class="hover:text-blue-600 transition">WhatsApp Link</a>
-                <a href="qr-generator.html" class="hover:text-blue-600 transition">QR Generator</a>
-            </nav>
-
-            <a href="#tools-section" class="bg-slate-900 hover:bg-blue-600 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg transition shadow-sm">
-                Explore Tools
-            </a>
+            </div>
         </div>
     </header>
 
-    <!-- Modern Hero Section -->
-    <section class="hero-pattern text-white py-16 sm:py-24 px-4 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-blue-200 text-xs font-semibold mb-6 backdrop-blur-sm">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                100% Free &bull; No Sign-Up &bull; Browser-Based Privacy
-            </div>
+    <!-- Hero Title + Category Filter Pills -->
+    <section class="pt-12 pb-6 px-4 text-center max-w-4xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl md:text-[42px] font-extrabold text-slate-900 tracking-tight leading-tight">
+            Every tool you need to work with PDFs, Images & daily tasks in one place
+        </h1>
+        <p class="text-slate-600 text-base sm:text-lg mt-4 max-w-3xl mx-auto leading-relaxed">
+            Merge PDFs, split pages, compress images to exact KB, calculate EMI/GST/Age, and format code—all <strong>100% FREE</strong> and processed privately inside your browser.
+        </p>
 
-            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-5">
-                Every Daily Utility Tool You Need, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-emerald-300">All in One Place.</span>
-            </h1>
-
-            <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mb-9 leading-relaxed">
-                Compress exam photos to exact KB, calculate government exam age eligibility, and generate instant WhatsApp & QR links—without your files ever leaving your device.
-            </p>
-
-            <!-- Live Search Bar -->
-            <div class="max-w-xl mx-auto relative">
-                <div class="flex items-center bg-white rounded-2xl p-2 shadow-2xl shadow-blue-950/50 border border-slate-200">
-                    <svg class="w-5 h-5 text-slate-400 ml-3 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                    <input type="text" id="toolSearch" placeholder="Search tools (e.g., 20KB photo, age, WhatsApp, QR)..." 
-                           class="w-full py-2 px-2 text-slate-800 text-sm sm:text-base focus:outline-none bg-transparent">
-                    <span class="hidden sm:inline-block text-xs font-medium text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md mr-1">Instant</span>
-                </div>
-            </div>
-
-            <!-- Quick Filter Pills -->
-            <div class="flex flex-wrap justify-center gap-2 mt-5 text-xs">
-                <span class="text-slate-400 py-1">Popular:</span>
-                <a href="image-compressor.html" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition">Compress to 20KB</a>
-                <a href="age-calculator.html" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition">Govt Exam Age</a>
-                <a href="whatsapp-link.html" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition">wa.me Link</a>
-                <a href="qr-generator.html" class="px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition">Permanent QR</a>
-            </div>
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mt-8">
+            <button onclick="filterCategory('all', this)" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-slate-900 text-white shadow-sm transition">All (24)</button>
+            <button onclick="filterCategory('pdf', this)" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-400 transition">PDF Tools</button>
+            <button onclick="filterCategory('image', this)" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-400 transition">Image & Exam</button>
+            <button onclick="filterCategory('calculator', this)" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-400 transition">Calculators</button>
+            <button onclick="filterCategory('text', this)" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-400 transition">Text & Dev</button>
+            <button onclick="filterCategory('utility', this)" class="cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-400 transition">QR & Links</button>
         </div>
     </section>
 
-    <!-- Tools Grid Section -->
-    <main id="tools-section" class="max-w-6xl mx-auto px-4 sm:px-6 py-14 flex-grow w-full">
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-2">
-            <div>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Popular Free Tools</h2>
-                <p class="text-slate-500 text-sm mt-1">Click any tool below to start instantly—zero waiting time.</p>
-            </div>
-            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full self-start sm:self-auto">
-                4 Active Utilities
-            </span>
-        </div>
-
-        <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- 24-Tool Dense Grid (iLovePDF Flat Card Style) -->
+    <main class="max-w-[1400px] mx-auto px-4 sm:px-6 py-6 flex-grow w-full">
+        <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             
-            <!-- Tool Card 1: Image Compressor -->
-            <a href="image-compressor.html" data-keywords="image photo compressor resize 20kb 50kb kb reducer jpg png signature" 
-               class="tool-card group relative bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1.5 hover:border-blue-500 transition-all duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-5">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-50 text-blue-700">Most Used</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition">Image Size Compressor</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Reduce JPG/PNG photo & signature size to 20KB, 50KB, or custom KB for exam & job forms.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-blue-600">
-                    Open Tool 
-                    <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
+            <!-- 1. Merge PDF -->
+            <a href="tools.html?tool=merge-pdf" data-category="pdf" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-orange-500 text-white flex items-center justify-center font-extrabold text-sm mb-4">PDF+</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Merge PDF</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Combine multiple PDF files into one single ordered document in seconds.</p>
             </a>
 
-            <!-- Tool Card 2: Age Calculator -->
-            <a href="age-calculator.html" data-keywords="age calculator dob date of birth years months days govt exam eligibility" 
-               class="tool-card group relative bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1.5 hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-5">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">Students</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition">Exact Age Calculator</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Calculate your exact age in years, months, and days as of any specific notification cut-off date.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-emerald-600">
-                    Open Tool 
-                    <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
+            <!-- 2. Split PDF -->
+            <a href="tools.html?tool=split-pdf" data-category="pdf" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-orange-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">SPLIT</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Split PDF</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Extract specific pages or separate one PDF into independent files easily.</p>
             </a>
 
-            <!-- Tool Card 3: WhatsApp Link -->
-            <a href="whatsapp-link.html" data-keywords="whatsapp link generator wa.me direct message chat without saving number" 
-               class="tool-card group relative bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-green-500/10 hover:-translate-y-1.5 hover:border-green-500 transition-all duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-5">
-                        <div class="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                            </svg>
-                        </div>
-                        <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-green-50 text-green-700">Business</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-green-600 transition">WhatsApp Link Generator</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Create direct wa.me chat links with pre-filled messages without saving phone numbers.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-green-600">
-                    Open Tool 
-                    <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
+            <!-- 3. JPG to PDF -->
+            <a href="tools.html?tool=jpg-to-pdf" data-category="pdf" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-amber-500 text-white flex items-center justify-center font-extrabold text-sm mb-4">JPG→PDF</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">JPG to PDF</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Convert JPG, PNG, and scanned certificate photos into a clean PDF file.</p>
             </a>
 
-            <!-- Tool Card 4: QR Code Generator -->
-            <a href="qr-generator.html" data-keywords="qr code generator free permanent url upi link barcode download png" 
-               class="tool-card group relative bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1.5 hover:border-purple-500 transition-all duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-5">
-                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                            </svg>
-                        </div>
-                        <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-purple-50 text-purple-700">No Expiry</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-purple-600 transition">Free QR Code Generator</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Convert any website URL, UPI link, or plain text into a downloadable static QR code.</p>
-                </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-sm font-semibold text-purple-600">
-                    Open Tool 
-                    <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </div>
+            <!-- 4. Rotate PDF -->
+            <a href="tools.html?tool=rotate-pdf" data-category="pdf" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-purple-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">↻ PDF</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Rotate PDF</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Rotate upside-down or sideways PDF pages permanently by 90° or 180°.</p>
+            </a>
+
+            <!-- 5. Compress Image to KB -->
+            <a href="image-compressor.html" data-category="image" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">20KB</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Compress Image to KB</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Reduce photo & signature size to exact 10KB, 20KB, 50KB, or 100KB for exam portals.</p>
+            </a>
+
+            <!-- 6. Photo & Signature Resizer -->
+            <a href="image-compressor.html" data-category="image" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-rose-500 text-white flex items-center justify-center font-extrabold text-sm mb-4">SIGN</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Exam Photo & Sign Resizer</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Resize dimensions and KB size for SSC, UPSC, TSPSC, APPSC, and passport forms.</p>
+            </a>
+
+            <!-- 7. PNG / WebP to JPG -->
+            <a href="image-compressor.html" data-category="image" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-teal-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">WEBP</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">PNG / WebP to JPG</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Convert heavy PNG or WebP images into lightweight, standard JPG format.</p>
+            </a>
+
+            <!-- 8. Image to Base64 -->
+            <a href="tools.html?tool=image-to-base64" data-category="image" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-cyan-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">IMG64</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Image to Base64</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Convert any image into a Base64 Data URI string for HTML/CSS embedding.</p>
+            </a>
+
+            <!-- 9. Exact Age Calculator -->
+            <a href="age-calculator.html" data-category="calculator" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-blue-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">AGE</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Exact Age Calculator</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Calculate exact age in years, months, and days as of any exam cut-off date.</p>
+            </a>
+
+            <!-- 10. Loan / EMI Calculator -->
+            <a href="tools.html?tool=emi-calc" data-category="calculator" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">EMI</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Home & Car EMI Calculator</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Calculate monthly loan EMI, total interest payable, and principal breakdown.</p>
+            </a>
+
+            <!-- 11. GST Calculator -->
+            <a href="tools.html?tool=gst-calc" data-category="calculator" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-violet-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">GST</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">GST Calculator (India)</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Add or remove 5%, 12%, 18%, or 28% GST with instant CGST & SGST split.</p>
+            </a>
+
+            <!-- 12. CGPA to Percentage -->
+            <a href="tools.html?tool=cgpa-calc" data-category="calculator" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-pink-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">CGPA</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">CGPA to Percentage</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Convert 10-point CBSE, JNTU, VTU, or university CGPA into accurate percentage.</p>
+            </a>
+
+            <!-- 13. WhatsApp Direct Link -->
+            <a href="whatsapp-link.html" data-category="utility" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-green-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">WA</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">WhatsApp Link Generator</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Generate direct wa.me chat links with pre-filled messages without saving numbers.</p>
+            </a>
+
+            <!-- 14. QR Code Generator -->
+            <a href="qr-generator.html" data-category="utility" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-purple-700 text-white flex items-center justify-center font-extrabold text-sm mb-4">QR</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Permanent QR Generator</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Create high-resolution static QR codes for URLs, UPI IDs, or text with zero expiry.</p>
+            </a>
+
+            <!-- 15. Strong Password Generator -->
+            <a href="tools.html?tool=password-gen" data-category="utility" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-slate-800 text-white flex items-center justify-center font-extrabold text-sm mb-4">PASS</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Strong Password Generator</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Generate cryptographically secure random passwords with custom symbols & length.</p>
+            </a>
+
+            <!-- 16. Text to PDF -->
+            <a href="tools.html?tool=text-to-pdf" data-category="pdf" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-red-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">TXT→PDF</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Text & Notes to PDF</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Paste plain text, notes, or letters and export them as a clean downloadable PDF.</p>
+            </a>
+
+            <!-- 17. Word & Character Counter -->
+            <a href="tools.html?tool=word-counter" data-category="text" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-sky-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">WORD</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Word & Character Counter</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Count exact words, characters, sentences, and reading time for essays & bios.</p>
+            </a>
+
+            <!-- 18. Case Converter -->
+            <a href="tools.html?tool=case-converter" data-category="text" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-amber-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">Aa</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Text Case Converter</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Convert text between UPPERCASE, lowercase, Title Case, and Sentence case instantly.</p>
+            </a>
+
+            <!-- 19. Remove Duplicate Lines -->
+            <a href="tools.html?tool=remove-duplicates" data-category="text" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-rose-600 text-white flex items-center justify-center font-extrabold text-sm mb-4">DEDUP</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Remove Duplicate Lines</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Clean up lists, email IDs, or logs by removing repeated lines in one click.</p>
+            </a>
+
+            <!-- 20. Remove Pages from PDF -->
+            <a href="tools.html?tool=remove-pages" data-category="pdf" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-red-500 text-white flex items-center justify-center font-extrabold text-sm mb-4">DEL</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Remove PDF Pages</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Delete unwanted blank or extra pages from any PDF file directly in your browser.</p>
+            </a>
+
+            <!-- 21. JSON Formatter & Validator -->
+            <a href="tools.html?tool=json-formatter" data-category="text" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-indigo-700 text-white flex items-center justify-center font-extrabold text-sm mb-4">{ }</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">JSON Formatter & Minifier</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Beautify, validate, and minify raw JSON payloads for API debugging.</p>
+            </a>
+
+            <!-- 22. Base64 Encoder / Decoder -->
+            <a href="tools.html?tool=base64-text" data-category="text" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-blue-700 text-white flex items-center justify-center font-extrabold text-sm mb-4">B64</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Base64 Encode / Decode</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Encode plain text or credentials to Base64 or decode Base64 strings back to text.</p>
+            </a>
+
+            <!-- 23. URL Encoder / Decoder -->
+            <a href="tools.html?tool=url-encoder" data-category="utility" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-extrabold text-sm mb-4">%20</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">URL Encoder & Decoder</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Safely encode query parameters or decode messy tracking URLs cleanly.</p>
+            </a>
+
+            <!-- 24. UPI Payment QR Generator -->
+            <a href="qr-generator.html" data-category="utility" class="tool-card group bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition">
+                <div class="w-11 h-11 rounded-lg bg-teal-700 text-white flex items-center justify-center font-extrabold text-sm mb-4">UPI</div>
+                <h2 class="text-base font-bold text-slate-900 mb-1.5 group-hover:text-rose-600">Shop & UPI QR Code</h2>
+                <p class="text-xs text-slate-500 leading-relaxed">Generate printable QR codes for digital links, menus, and customer feedback.</p>
             </a>
 
         </div>
-
-        <!-- No Search Results Message -->
-        <div id="noResults" class="hidden text-center py-12">
-            <p class="text-slate-500 font-medium">No matching tools found. Try searching for "image", "age", "WhatsApp", or "QR".</p>
-        </div>
-
-        <!-- Why Choose Us / Trust Section (Great for User Trust & AdSense Content Depth) -->
-        <section class="mt-20 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-sm">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <h2 class="text-2xl font-extrabold text-slate-900">Why Thousands Trust QuickTools.in</h2>
-                <p class="text-slate-500 text-sm mt-2">Built for speed, simplicity, and absolute privacy on both mobile and desktop browsers.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 font-bold">1</div>
-                    <div>
-                        <h3 class="font-bold text-slate-900 mb-1">100% Browser-Based Privacy</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed">Your photos and signatures are processed locally in your browser. Nothing is ever uploaded to any external server.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 font-bold">2</div>
-                    <div>
-                        <h3 class="font-bold text-slate-900 mb-1">Zero Sign-Up or Hidden Fees</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed">No login walls, no watermarks, and no daily limits. Open any tool and get your work done in seconds.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 font-bold">3</div>
-                    <div>
-                        <h3 class="font-bold text-slate-900 mb-1">Tailored for Indian Forms</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed">Optimized specifically for SSC, UPSC, TSPSC, APPSC, and college portal file-size and age rules.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <!-- Comprehensive AdSense-Ready Footer -->
-    <footer class="bg-slate-900 text-slate-400 pt-12 pb-8 mt-12 border-t border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800 text-sm">
-                <div>
-                    <span class="text-xl font-extrabold text-white">QuickTools<span class="text-blue-500">.in</span></span>
-                    <p class="mt-3 text-slate-400 leading-relaxed">Fast, free, and secure browser utilities built for students, job aspirants, and everyday productivity.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-3">Quick Utilities</h4>
-                    <ul class="space-y-2">
-                        <li><a href="image-compressor.html" class="hover:text-white transition">Image Compressor (20KB/50KB)</a></li>
-                        <li><a href="age-calculator.html" class="hover:text-white transition">Exact Age Calculator</a></li>
-                        <li><a href="whatsapp-link.html" class="hover:text-white transition">WhatsApp Direct Link</a></li>
-                        <li><a href="qr-generator.html" class="hover:text-white transition">Permanent QR Generator</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-3">Company & Legal</h4>
-                    <ul class="space-y-2">
-                        <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
-                        <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
-                        <li><a href="privacy-policy.html" class="hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="hover:text-white transition">Terms & Conditions</a></li>
-                    </ul>
-                </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-16 py-10 text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex flex-wrap justify-center gap-6 font-semibold text-slate-600">
+                <a href="index.html" class="hover:text-rose-600">Home</a>
+                <a href="about.html" class="hover:text-rose-600">About Us</a>
+                <a href="contact.html" class="hover:text-rose-600">Contact Us</a>
+                <a href="privacy-policy.html" class="hover:text-rose-600">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-rose-600">Terms & Conditions</a>
             </div>
-            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-2">
-                <p>&copy; 2026 QuickTools.in. All rights reserved.</p>
-                <p>Processed 100% locally in your browser.</p>
-            </div>
+            <p class="text-xs text-slate-400">&copy; 2026 QuickTools.in &bull; 24+ Free Browser Utilities</p>
         </div>
     </footer>
 
-    <!-- Live Search Filter Script -->
     <script>
-        const searchInput = document.getElementById('toolSearch');
-        const cards = document.querySelectorAll('.tool-card');
-        const noResults = document.getElementById('noResults');
-
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            let visibleCount = 0;
-
-            cards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const desc = card.querySelector('p').textContent.toLowerCase();
-                const keywords = card.getAttribute('data-keywords').toLowerCase();
-
-                if (title.includes(query) || desc.includes(query) || keywords.includes(query)) {
-                    card.classList.remove('hidden');
-                    visibleCount++;
-                } else {
-                    card.classList.add('hidden');
-                }
+        function filterCategory(category, btn) {
+            document.querySelectorAll('.cat-pill').forEach(b => {
+                b.className = 'cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:border-slate-400 transition';
             });
+            btn.className = 'cat-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-slate-900 text-white shadow-sm transition';
 
-            if (visibleCount === 0) {
-                noResults.classList.remove('hidden');
-            } else {
-                noResults.classList.add('hidden');
-            }
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.toggle('hidden', category !== 'all' && card.dataset.category !== category);
+            });
+        }
+
+        document.getElementById('topSearchInput').addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase().trim();
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(q));
+            });
         });
     </script>
 </body>
